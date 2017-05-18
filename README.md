@@ -1,4 +1,4 @@
-# Python-Nagios-Plugins
+# check_alcatel_lsp
 Nagios style plugin to check Alcatel LSP status 
 
 Sample output:
