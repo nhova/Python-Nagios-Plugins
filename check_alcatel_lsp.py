@@ -6,15 +6,14 @@ import logging
 import re
 from pysnmp.hlapi import *
 
-
 lsp_name_oid = "1.3.6.1.4.1.6527.3.1.2.6.1.1.4."
 lsp_status_oid = "1.3.6.1.4.1.6527.3.1.2.6.1.1.6."
 
-p = re.compile( lsp_name_oid+"(\d+\.\d+)" )
 _log = logging.getLogger('nagiosplugin')
 lsp_list = []
 
 def get_lsp_list(address, community):
+    p = re.compile( lsp_name_oid+"(\d+\.\d+)" )
     for (errorIndication, errorStatus, errorIndex, varBinds) in nextCmd(SnmpEngine(),
                     CommunityData(community, mpModel=1), UdpTransportTarget((address, 161)),
                     ContextData(), ObjectType(ObjectIdentity(lsp_name_oid)),
@@ -99,12 +98,19 @@ def main():
                       help = 'Hostname or IP of device')
     argp.add_argument('-C', '--community', required = True,
                       help = 'SNMP community string')
+    argp.add_argument('-L', '--lsp', nargs='+',
+                      help = 'One or more LSP ID (Optional)')
     args = argp.parse_args()
 
     address = args.host
     community = args.community
-    
-    get_lsp_list(address, community) 
+   
+    if not args.lsp:  
+        get_lsp_list(address, community) 
+    else:
+        for lsp in args.lsp:
+            lsp_list.append(lsp)    
+
     check = nagiosplugin.Check( LSP(address, community, lsp_list), LSPContext('lsp_metrics'),  Summary() )
     check.main()
 
