@@ -20,7 +20,9 @@ optional arguments:
 ```
 
 **Collect all LSPs and report status**
+
     check_alcatel_lsp.py 192.168.1.1 public
 
 **Collect specific LSPs and report status**
+
     check_alcatel_lsp.py 192.168.1.1 public --lsp 1.1 1.2
