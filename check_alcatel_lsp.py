@@ -94,12 +94,12 @@ class Summary(nagiosplugin.Summary):
 @nagiosplugin.guarded
 def main():
     argp = argparse.ArgumentParser()
-    argp.add_argument('-H', '--host', required = True,
+    argp.add_argument('host',
                       help = 'Hostname or IP of device')
-    argp.add_argument('-C', '--community', required = True,
+    argp.add_argument('community', 
                       help = 'SNMP community string')
-    argp.add_argument('-L', '--lsp', nargs='+',
-                      help = 'One or more LSP ID (Optional)')
+    argp.add_argument('--lsp', nargs='+',
+                      help = 'One or more LSP IDs')
     args = argp.parse_args()
 
     address = args.host
