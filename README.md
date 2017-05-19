@@ -1,7 +1,7 @@
 # check_alcatel_lsp
 Nagios style plugin to check Alcatel LSP status.
 
-Sample output:
+**Sample output:**
 
 ```
 LSP OK - BAUHAUS-PE1-LSP: LSP OK, BAUHAUS-PE2-LSP: LSP OK, BAUHAUS-PE3-monitoring-LSP: LSP OK
